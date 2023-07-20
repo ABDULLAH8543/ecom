@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppo A16 Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(72, 72, 72);
+            font-family: Arial, sans-serif;
+        }
+
+        .nav {
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+
+        #header {
+            background-color: rgba(0, 0, 0, 0.605);
+            color: red;
+            min-height: 87vh;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            letter-spacing: 2px;
+            font-style: italic;
+            justify-content: center;
+        }
+
+        #heading {
+            border-bottom: 2px solid white;
+        }
+
+        #shops {
+            color: violet;
+            margin: 40px;
+        }
+
+        .shops {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+        }
+        .product{
+            border: 2px solid red;
+            margin: 50px 30px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        /* Media queries for tablet or iPad */
+        @media (min-width: 768px) {
+            .shops {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Media queries for desktop or larger screens */
+        @media (min-width: 1200px) {
+            .shops {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <h1>Brand name</h1>
+    </div>
+    <div id="header">
+        <h1 id="heading">one Inventory</h1>
+    </div>
+    <h1 id="shops">Products</h1>
+    <div class="shops">
+
+    </div>
+    <script>
+        let products = [
+            {
+                image: "image.jpg",
+                name: "pink-bag",
+            },
+            {
+                image: "image.jpg",
+                name: "black-bag",
+            },
+            {
+                image: "image.jpg",
+                name: "red-bag",
+            },
+        ]
+        let productsinner = "";
+        products.forEach(product => {
+            productsinner += `
+            <div class="product">
+                <img src="${product.image}" alt="image">
+                <h2 class="product-name">${product.name}</h2>  
+            </div>
+            `
+        })
+        let producthtml = document.querySelector(".shops").innerHTML += productsinner;
+    </script>
+</body>
+
+</html>

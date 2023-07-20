@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppo A16 Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(232, 230, 230);
+            font-family: Arial, sans-serif;
+        }
+
+        .nav {
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+
+        #header {
+            background-color: rgba(0, 0, 0, 0.811);
+            color: red;
+            min-height: 87vh;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            letter-spacing: 2px;
+            font-style: italic;
+            justify-content: center;
+        }
+
+        #heading {
+            border-bottom: 2px solid rgb(255, 255, 255);
+        }
+
+        .shops {
+            border: 2px solid red;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .product-description {
+            font-size: 16px;
+        }
+
+        input {
+            padding: 20px;
+            margin: 30px 50px;
+            outline: none;
+            border-bottom: 2px solid rgb(0, 0, 0);
+            font-size: 20px;
+            background: transparent;
+            border-radius: 10px;
+            color: rgb(0, 0, 0);
+            caret-color: rgb(255, 0, 0);
+        }
+
+        input::placeholder {
+            color: rgb(0, 0, 0);
+        }
+
+        #mainheading {
+            color: rgb(0, 0, 0);
+            margin: 40px;
+            display: flex;
+            width: 50vw;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        #shops {
+            border-bottom: 2px solid red;
+            padding-bottom: 10px;
+            width: 12vw;
+            animation: slide_animation 2s infinite alternate;
+        }
+
+        @keyframes slide_animation {
+            0% {
+                width: 0vw;
+            }
+
+            100% {
+                width: 12vw;
+            }
+        }
+
+        #shopsinner {
+            margin: 10px 30px;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        /* Media queries for tablet or iPad */
+        @media (min-width: 768px) {
+            #shopsinner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Media queries for desktop or larger screens */
+        @media (min-width: 1200px) {
+            #shopsinner {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .shopheading {
+            border: 2px solid red;
+            padding: 10px;
+            margin: 30px 20px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <h1>Inventory</h1>
+    </div>
+    <div id="header">
+        <h1 id="heading">Inventory</h1>
+    </div>
+    <div id="inputs">
+        <input type="text" name="" id="inshop" placeholder="search shops here">
+        <input type="text" name="" id="inpro" placeholder="search products here">
+    </div>
+    <div id="mainheading">
+        <h1 id="shops">Shops</h1>
+    </div>
+    <div id="shopsinner">
+    </div>
+
+</body>
+<script>
+    let shops = [
+        {
+            id: "one",
+            image: "",
+            name: "one",
+        },
+        {
+            id: "two",
+            image: "",
+            name: "two",
+        },
+        {
+            id: "three",
+            image: "",
+            name: "three",
+        }
+    ];
+    shopshtml = "";
+    shops.forEach(shop => {
+        shopshtml += `
+            <div class="shopheading" id="${shop.id}">
+            <img src="${shop.image}" alt="Image here">
+            <h2 class="product-name">${shop.name}</h2>
+            </div>
+            `
+    })
+    let shopsinnerhtml = document.getElementById("shopsinner").innerHTML += shopshtml;
+    let one = document.getElementById("one");
+    one.addEventListener("click", function () {
+        window.location.assign("shopone.html");
+    })
+    let two = document.getElementById("two");
+    two.addEventListener("click", function () {
+        window.location.assign("shoptwo.html");
+    })  
+      let three = document.getElementById("three");
+    three.addEventListener("click", function () {
+        window.location.assign("shopthree.html");
+    })
+    let inshop = document.getElementById("inshop");
+    inshop.addEventListener("input", function () {
+        let inputVal = inshop.value.toLowerCase();
+        console.log(inputVal);
+        let shopHeadings = document.getElementsByClassName("shopheading");
+        for (let i = 0; i < shopHeadings.length; i++) {
+            let shopName = shopHeadings[i].getElementsByTagName("h2")[0].textContent.toLowerCase();
+            if (shopName.includes(inputVal)) {
+                shopHeadings[i].classList.remove("hidden");
+            } else {
+                shopHeadings[i].classList.add("hidden");
+            }
+        }
+    });
+</script>
+
+</html>
