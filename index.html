@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oppo A16 Shop</title>
+    <title>Document</title>
     <style>
         * {
             margin: 0;
@@ -149,7 +149,7 @@
     </div>
     <div id="inputs">
         <input type="text" name="" id="inshop" placeholder="search shops here">
-<!--         <input type="text" name="" id="inpro" placeholder="search products here"> -->
+        <input type="text" name="" id="inpro" placeholder="search products here">
     </div>
     <div id="mainheading">
         <h1 id="shops">Shops</h1>
@@ -157,61 +157,118 @@
     <div id="shopsinner">
     </div>
 
-</body>
-<script>
-    let shops = [
-        {
-            id: "one",
-            image: "",
-            name: "one",
-        },
-        {
-            id: "two",
-            image: "",
-            name: "two",
-        },
-        {
-            id: "three",
-            image: "",
-            name: "three",
+    <script>
+        let shops = [
+            {
+                id: "one",
+                image: "",
+                name: "one",
+            },
+            {
+                id: "two",
+                image: "",
+                name: "two",
+            },
+            {
+                id: "three",
+                image: "",
+                name: "three",
+            }
+        ];
+
+        let products = [
+            {
+                name: "bag"
+            },
+            {
+                name: "chain"
+            },
+            {
+                name: "bracelate"
+            },
+            {
+                name: "heart"
+            },
+        ];
+
+        function renderShops() {
+            let shopshtml = "";
+            shops.forEach(shop => {
+                shopshtml += `
+                    <div class="shopheading" id="${shop.id}">
+                    <img src="${shop.image}" alt="Image here">
+                    <h2 class="product-name">${shop.name}</h2>
+                    </div>
+                    `;
+            });
+            document.getElementById("shopsinner").innerHTML = shopshtml;
+            document.getElementById("mainheading").innerHTML = '<h1 id="shops">Shops</h1>';
         }
-    ];
-    shopshtml = "";
-    shops.forEach(shop => {
-        shopshtml += `
-            <div class="shopheading" id="${shop.id}">
-            <img src="${shop.image}" alt="Image here">
-            <h2 class="product-name">${shop.name}</h2>
-            </div>
-            `
-    })
-    let shopsinnerhtml = document.getElementById("shopsinner").innerHTML += shopshtml;
-    let one = document.getElementById("one");
-    one.addEventListener("click", function () {
-        window.location.assign("shopone.html");
-    })
-    let two = document.getElementById("two");
-    two.addEventListener("click", function () {
-        window.location.assign("shoptwo.html");
-    })  
-      let three = document.getElementById("three");
-    three.addEventListener("click", function () {
-        window.location.assign("shopthree.html");
-    })
-    let inshop = document.getElementById("inshop");
-    inshop.addEventListener("input", function () {
-        let inputVal = inshop.value.toLowerCase();
-        console.log(inputVal);
-        let shopHeadings = document.getElementsByClassName("shopheading");
-        for (let i = 0; i < shopHeadings.length; i++) {
-            let shopName = shopHeadings[i].getElementsByTagName("h2")[0].textContent.toLowerCase();
-            if (shopName.includes(inputVal)) {
-                shopHeadings[i].classList.remove("hidden");
+
+        function renderProducts(inputVal) {
+            let productshtml = "";
+            products.forEach(product => {
+                if (product.name.includes(inputVal)) {
+                    productshtml += `
+                    <div class="shopheading">
+                    <img src="" alt="Image here">
+                    <h2 class="product-name">${product.name}</h2>
+                    </div>
+                    `;
+                }
+            });
+            if (productshtml !== "") {
+                document.getElementById("shopsinner").innerHTML = productshtml;
+                document.getElementById("mainheading").innerHTML = '<h1 id="shops">Products</h1>';
             } else {
-                shopHeadings[i].classList.add("hidden");
+                document.getElementById("shopsinner").innerHTML = '<div class="shopheading"><h2>No product found</h2></div>';
+                document.getElementById("mainheading").innerHTML = '<h1 id="shops">Shops</h1>';
             }
         }
-    });
-</script>
+
+        function filterShops(inputVal) {
+            let shopHeadings = document.getElementsByClassName("shopheading");
+            for (let i = 0; i < shopHeadings.length; i++) {
+                let shopName = shopHeadings[i].getElementsByTagName("h2")[0].textContent.toLowerCase();
+                if (shopName.includes(inputVal)) {
+                    shopHeadings[i].classList.remove("hidden");
+                } else {
+                    shopHeadings[i].classList.add("hidden");
+                }
+            }
+        }
+
+        renderShops(); // Initially render shops
+
+        document.getElementById("inshop").addEventListener("input", function () {
+            let inputVal = this.value.toLowerCase();
+            if (inputVal === "") {
+                renderShops(); // Display all shops when the search input is empty
+            } else {
+                filterShops(inputVal);
+            }
+        });
+
+        document.getElementById("inpro").addEventListener("input", function () {
+            let inputVal = this.value.toLowerCase();
+            if (inputVal === "") {
+                renderShops(); // Display all shops when the product search input is empty
+            } else {
+                renderProducts(inputVal);
+            }
+        });
+
+        // Add event listeners for each shop heading to redirect to specific shop pages
+        document.getElementById("one").addEventListener("click", function () {
+            window.location.assign("shopone.html");
+        });
+        document.getElementById("two").addEventListener("click", function () {
+            window.location.assign("shoptwo.html");
+        });
+        document.getElementById("three").addEventListener("click", function () {
+            window.location.assign("shopthree.html");
+        });
+    </script>
+</body>
 
 </html>
